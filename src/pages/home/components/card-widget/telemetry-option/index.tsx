@@ -1,6 +1,5 @@
 import { Icon } from "@/components/icon";
-import { useAddWidgetStore } from "@/pages/home/widget-store";
-import { Widget } from "@/utils";
+import { flatten, Widget } from "@/utils";
 import axios from "axios";
 import { Loader } from "lucide-react";
 import useSWR from "swr";
@@ -9,6 +8,11 @@ type Data = {
   icon?: string;
   telemetryName?: string;
 };
+
+export function stringify(value: unknown) {
+  if (typeof value === "string") return value;
+  return JSON.stringify(value);
+}
 
 export default function CardWidget({
   title,
@@ -46,16 +50,9 @@ export default function CardWidget({
     <div className="flex justify-between items-center   overflow-hidden  w-full h-full">
       <div className="flex gap-2 flex-col  capitalize">
         <span className="font-semibold">{title}</span>
-        <span className="first-letter:uppercase truncate">
-          {JSON.stringify(data)}
-          {/*{JSON.stringify(title)} */}
-          {/* {(telemetryName &&
-            stringify(
-              flatten({
-                [name!]: telemetry?.value,
-              })?.[telemetryName]
-            )) ||
-            "---"} */}
+        <span className="normal-case  truncate">
+          {(telemetryName && stringify(flatten(data)?.[telemetryName])) ||
+            "---"}
         </span>
       </div>
       {icon && <Icon name={icon} size={52} strokeWidth={1.5} />}
