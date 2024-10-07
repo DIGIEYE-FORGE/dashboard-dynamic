@@ -16,6 +16,7 @@ import AreaChartOptions from "../area-chart-options";
 import BarChartOptions from "../bar-chart-options";
 import DonutChartOptions from "../donut-chart-options";
 import PieChartOptions from "../pie-chart-options";
+import CardOptions from "../card-options";
 
 const AddWidgetDialog = () => {
   const { addWidget, widgetId, setWidgetId } = useGridStore();
@@ -50,6 +51,7 @@ const AddWidgetDialog = () => {
     if (data.type === "barChart") return <BarChartOptions />;
     if (data.type === "donutChart") return <DonutChartOptions />;
     if (data.type === "pieChart") return <PieChartOptions />;
+    if (data.type === "card") return <CardOptions />;
     // if (data.type === "donutChart") return <PieChartOptions />;
     // if (data.type === "card") return <CardOptions />;
     // if (data.type === "gauge") return <GaugeOptions />;
@@ -101,7 +103,7 @@ const AddWidgetDialog = () => {
         }
         <div className="flex items-center justify-end gap-4 pt-4">
           <Button variant="outline" onClick={handleClose}>
-            <span className="first-letter:uppercase">cancel"</span>
+            <span className="first-letter:uppercase">cancel</span>
           </Button>
           {step === 1 && (
             <Button

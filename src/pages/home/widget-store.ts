@@ -72,7 +72,7 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
     const telemetries = (get().data.attributes?.telemetries ||
       []) as ChartTelemetry[];
     const exist = telemetries.find(
-      (item) => item.serial === data.serial && item.name === data.name
+      (item) => item.name === data.name
     );
     if (exist) return;
     const newTelemetries = [...telemetries, data];
@@ -90,7 +90,7 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
     const telemetries = (get().data.attributes?.telemetries ||
       []) as ChartTelemetry[];
     const newTelemetries = telemetries.filter(
-      (item) => item.serial !== telemetry.serial || item.name !== telemetry.name
+      (item) => item.name !== telemetry.name
     );
     set({
       data: {
@@ -125,18 +125,17 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
     if (step === 1 && type === "card") {
       const cardType = get().data.attributes?.type as WidgetCardType;
       const content = get().data.attributes?.content;
-      const cameraId = get().data.attributes?.cameraId;
       const telemetryName = get().data.attributes?.telemetryName;
       if (!cardType) return true;
       if (cardType === "text" && !content) return true;
-      if (cardType === "telemetry" && (!cameraId || !telemetryName)) {
+      if (cardType === "telemetry" && (!telemetryName)) {
         return true;
       }
     }
     if (step === 1 && type === "gauge") {
       const gaugeData = get().data.attributes as GaugeWidgetData;
-      const { serial, telemetryName, stops } = gaugeData;
-      return !serial || !telemetryName || !stops || !stops.length;
+      const {  telemetryName, stops } = gaugeData;
+      return !telemetryName || !stops || !stops.length;
     }
 
     return false;

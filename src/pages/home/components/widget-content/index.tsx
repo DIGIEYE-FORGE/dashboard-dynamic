@@ -22,6 +22,7 @@ import AreaChartWidget from "../area-chart-widget";
 import BarChartWidget from "../bar-chart-widget";
 import DonutChartWidget from "../donut-chart-widget";
 import PieChartWidget from "../pie-chart-widget";
+import CardWidget from "../card-widget";
 // import VideoWidget from "../video-widget";
 // import CardWidget from "../card-widget";
 // import GaugeWidget from "../gauge-widget";
@@ -78,10 +79,11 @@ export default function WidgetContent({ item }: Props) {
       return WithHeader(<DonutChartWidget {...item} />, item.title);
     if (item.type === "pieChart")
       return WithHeader(<PieChartWidget {...item} />, item.title);
+    if (item.type === "card") return <CardWidget {...item} />;
     //   return WithHeader(<PieChartWidget {...item} />, item.title);
     // if (item.type === "donutChart")
     //   return WithHeader(<DonutChartWidget {...item} />, item.title);
-    // if (item.type === "card") return <CardWidget {...item} />;
+    //
     // if (item.type === "video") return <VideoWidget {...item} />;
     // if (item.type === "gauge")
     //   return WithHeader(<GaugeWidget {...item} />, item.title);
