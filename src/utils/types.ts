@@ -39,7 +39,6 @@ export type DateRange = {
 };
 
 export type ChartTelemetry = {
-  serial: string;
   name: string;
   label?: string;
   unit?: string;
@@ -47,7 +46,6 @@ export type ChartTelemetry = {
 };
 
 export type GaugeWidgetData = {
-  serial: string;
   telemetryName: string;
   unit?: string;
   stops: {

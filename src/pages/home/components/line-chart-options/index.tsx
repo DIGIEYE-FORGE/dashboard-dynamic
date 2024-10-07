@@ -9,7 +9,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAddWidgetStore } from "../../widget-store";
 
 const defaultTelemetry: ChartTelemetry = {
-  serial: "",
   name: "",
   label: "",
   color: "#d32727",
@@ -26,7 +25,7 @@ export default function LineChartOptions() {
     e.stopPropagation();
     e.preventDefault();
 
-    if (!telemetryData.serial || !telemetryData.name) return;
+    if (!telemetryData.name) return;
 
     addTelemetry(telemetryData);
   }
@@ -37,16 +36,6 @@ export default function LineChartOptions() {
         onSubmit={handleSubmit}
         className="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-x-2 gap-y-3"
       >
-        <Input
-          placeholder="serial"
-          value={telemetryData.serial}
-          onChange={(e) => {
-            setTelemetryData((prev) => ({
-              ...prev,
-              serial: e.target.value,
-            }));
-          }}
-        />
         <Input
           className="rounded"
           placeholder="name"
@@ -94,11 +83,7 @@ export default function LineChartOptions() {
             }));
           }}
         />
-        <Button
-          type="submit"
-          variant="outline"
-          disabled={!telemetryData.serial || !telemetryData.name}
-        >
+        <Button type="submit" variant="outline" disabled={!telemetryData.name}>
           <PlusIcon size={18} />
         </Button>
       </form>
@@ -107,7 +92,6 @@ export default function LineChartOptions() {
           <Table className="w-full text-xs [&_th]:p-3">
             <thead>
               <tr>
-                <th>serial</th>
                 <th>telemetry</th>
                 <th>label</th>
                 <th>color</th>
@@ -117,7 +101,6 @@ export default function LineChartOptions() {
               {telemetries.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td>{item.serial}</td>
                     <td>{item.name}</td>
                     <td>{item.label || item.name}</td>
                     <td>

@@ -122,7 +122,7 @@ export const flatten = (
 ) => {
   for (const key in obj) {
     const propName = parentKey ? `${parentKey}${sep}${key}` : key;
-    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+    if (typeof obj[key] === "object") {
       res[propName] = obj[key];
       flatten(obj?.[key], propName, res, sep);
     } else {

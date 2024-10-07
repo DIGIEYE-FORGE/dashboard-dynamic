@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ChartTelemetry,
   TGroupBy,
@@ -16,78 +17,57 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { useId } from "react";
 import { cn } from "@/lib/utils";
-import { useGridStore } from "../../grid-store";
 // import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 export default function LineChartWidget(props: Widget) {
   // const { t } = useTranslation();
-  const { dateRange } = useGridStore();
   const [groupBy, setGroupBy] = useState<TGroupBy>("hour");
   const activeId = useId();
   const chartId = useId();
 
   const telemetries = (props.attributes?.telemetries || []) as ChartTelemetry[];
   const { apiUrl, token } = props;
-  const { data, isLoading, error } = useSWR(
-    `histories?${JSON.stringify({
-      telemetries,
-      dateRange,
-    })}`,
-    async () => {
-      if (telemetries.length === 0) return [];
-      const res = await Promise.all(
-        telemetries.map(async ({ serial, name }) => {
-          if (!serial) return [];
-          const res: any = await axios.get(apiUrl, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            params: {
-              take: 10_000,
-              where: JSON.stringify({ serial }),
-            },
-          });
-          // const results = await backendApi.getHistory({
-          //   serial,
-          //   select: ["results." + name],
-          //   startDate: dateRange.from,
-          //   endDate: dateRange.to,
-          //   take:100,
-          // });
-          // return results;
-          // console.log({ res });
-          return res.data.results;
-        })
-      );
-      // console.log({ res });
-      return res.map((item, index) => ({
+  const { data, isLoading, error } = useSWR(apiUrl, async () => {
+    if (telemetries.length === 0) return [];
+    let { data } = await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!Array.isArray(data)) {
+      data = [data];
+    }
+    const dataMap = telemetries.map((item: any, index: number) => {
+      console.log({ item });
+      return {
         name: telemetries[index].label || telemetries[index].name,
         type: "line",
-        data: item.map((item) => ({
-          x: new Date(item.createdAt),
+        data: data.map((item: any) => ({
+          x: new Date(),
           y: Number(flatten(item)[telemetries[index].name]),
         })),
-      }));
-    }
-  );
+      };
+    });
+    return dataMap;
+  });
 
   const groupedData = useMemo(() => {
     if (!data) return [];
     if (groupBy === "hour") {
-      return data.map((item) => ({
+      return data.map((item: any) => ({
         ...item,
         data: groupByHour(item.data),
       }));
     }
     if (groupBy === "day") {
-      return data.map((item) => ({
+      return data.map((item: any) => ({
         ...item,
         data: groupByDay(item.data),
       }));
     }
     if (groupBy === "week") {
-      return data.map((item) => ({
+      return data.map((item: any) => ({
         ...item,
         data: groupByWeek(item.data),
       }));
