@@ -33,8 +33,8 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
     title: "",
     type: "card",
     attributes: {},
-    apiUrl: "https://api.cloud.digieye.io/api/history",
-    token: "",
+    apiUrl: "http://54.197.132.147:1880/api/data",
+    token: "123456",
   },
   step: 0,
   setData: (data: Omit<Widget, "id">) => {

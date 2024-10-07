@@ -12,6 +12,10 @@ import WidgetLogo from "../widget-logo";
 import { Button } from "@/components/ui/button";
 import { Step1 } from "../step1";
 import LineChartOptions from "../line-chart-options";
+import AreaChartOptions from "../area-chart-options";
+import BarChartOptions from "../bar-chart-options";
+import DonutChartOptions from "../donut-chart-options";
+import PieChartOptions from "../pie-chart-options";
 
 const AddWidgetDialog = () => {
   const { addWidget, widgetId, setWidgetId } = useGridStore();
@@ -42,9 +46,10 @@ const AddWidgetDialog = () => {
 
   const Step2 = useCallback(() => {
     if (data.type === "lineChart") return <LineChartOptions />;
-    // if (data.type === "areaChart") return <LineChartOptions />;
-    // if (data.type === "barChart") return <LineChartOptions />;
-    // if (data.type === "pieChart") return <PieChartOptions />;
+    if (data.type === "areaChart") return <AreaChartOptions />;
+    if (data.type === "barChart") return <BarChartOptions />;
+    if (data.type === "donutChart") return <DonutChartOptions />;
+    if (data.type === "pieChart") return <PieChartOptions />;
     // if (data.type === "donutChart") return <PieChartOptions />;
     // if (data.type === "card") return <CardOptions />;
     // if (data.type === "gauge") return <GaugeOptions />;

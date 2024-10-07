@@ -18,6 +18,10 @@ import { useGridStore } from "../../grid-store";
 import { useAddWidgetStore } from "../../widget-store";
 import { cn } from "@/lib/utils";
 import LineChartWidget from "../line-chart-widget";
+import AreaChartWidget from "../area-chart-widget";
+import BarChartWidget from "../bar-chart-widget";
+import DonutChartWidget from "../donut-chart-widget";
+import PieChartWidget from "../pie-chart-widget";
 // import VideoWidget from "../video-widget";
 // import CardWidget from "../card-widget";
 // import GaugeWidget from "../gauge-widget";
@@ -64,9 +68,16 @@ export default function WidgetContent({ item }: Props) {
 
   const Comp = useCallback(() => {
     // if (item.type === "areaChart") return <AreaChartWidget {...item} />;
-    // if (item.type === "barChart") return <BarChartWidget {...item} />;
-    if (item.type === "lineChart") return <LineChartWidget {...item} />;
-    // if (item.type === "pieChart")
+    if (item.type === "lineChart")
+      return WithHeader(<LineChartWidget {...item} />, item.title);
+    if (item.type === "areaChart")
+      return WithHeader(<AreaChartWidget {...item} />, item.title);
+    if (item.type === "barChart")
+      return WithHeader(<BarChartWidget {...item} />, item.title);
+    if (item.type === "donutChart")
+      return WithHeader(<DonutChartWidget {...item} />, item.title);
+    if (item.type === "pieChart")
+      return WithHeader(<PieChartWidget {...item} />, item.title);
     //   return WithHeader(<PieChartWidget {...item} />, item.title);
     // if (item.type === "donutChart")
     //   return WithHeader(<DonutChartWidget {...item} />, item.title);

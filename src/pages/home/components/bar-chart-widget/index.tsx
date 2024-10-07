@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 // import { useTranslation } from "react-i18next";
 import axios from "axios";
 
-export default function LineChartWidget(props: Widget) {
+export default function BarChartWidget(props: Widget) {
   // const { t } = useTranslation();
   const [groupBy, setGroupBy] = useState<TGroupBy>("hour");
   const activeId = useId();
@@ -52,7 +52,7 @@ export default function LineChartWidget(props: Widget) {
     return telemetries.map((item: any, index: number) => {
       return {
         name: telemetries[index].label || telemetries[index].name,
-        type: "line",
+        type: "bar",
         data: data.map((item: any) => ({
           x: new Date(),
           y: Number(flatten(item)[telemetries[index].name]),
@@ -144,14 +144,14 @@ export default function LineChartWidget(props: Widget) {
             colors: telemetries.map((item) => item.color),
             chart: {
               id: chartId,
-              type: "line",
+              type: "bar",
               background: "transparent",
               toolbar: {
                 show: false,
               },
-              animations: {
-                enabled: false,
-              },
+              // animations: {
+              //   enabled: false,
+              // },
               zoom: {
                 enabled: false,
               },
@@ -199,7 +199,7 @@ export default function LineChartWidget(props: Widget) {
             },
           }}
           series={groupedData || []}
-          type={"line"}
+          type={"bar"}
           width={"100%"}
           height={"100%"}
         />
