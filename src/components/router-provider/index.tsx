@@ -1,6 +1,4 @@
 import App from "@/App";
-import AboutPage from "@/pages/about";
-import ContactPage from "@/pages/contact";
 import HomePage from "@/pages/home";
 import NotfoundPage from "@/pages/notfound";
 import {
@@ -17,14 +15,6 @@ const routes: RouteObject[] = [
       {
         path: "",
         element: <HomePage />,
-      },
-      {
-        path: "about",
-        element: <AboutPage />,
-      },
-      {
-        path: "contact",
-        element: <ContactPage />,
       },
     ],
   },
