@@ -115,7 +115,7 @@ export default function WidgetContent({ item }: Props) {
             size="icon"
             variant="ghost"
             className={cn(
-              "absolute top-2 !p-0 !size-6 z-10 right-2 text-foreground/50",
+              "absolute top-2 !p-0 !size-6 z-10 right-2 hover:bg-background/10 text-foreground/50",
               {
                 hidden: editMode,
               }

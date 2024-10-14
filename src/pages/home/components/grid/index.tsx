@@ -52,6 +52,7 @@ export function Grid() {
       {!editMode ? (
         <StaticGrid>
           {sortedWidgets.map((item) => {
+            const { backgroundColor, color } = item;
             return (
               <Card
                 key={item.id}
@@ -67,6 +68,10 @@ export function Grid() {
                     item.y + item.h + 1
                   }`
                 )}
+                style={{
+                  backgroundColor,
+                  color,
+                }}
               >
                 <WidgetContent item={item} key={item.id} />
               </Card>

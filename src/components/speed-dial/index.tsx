@@ -25,7 +25,7 @@ const SpeedDialContent = React.forwardRef<
           sideOffset={sideOffset}
           side={side}
           className={cn(
-            "rounded z-[500] text-popover-foreground outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 flex gap-1 justify-center items-center",
+            "rounded z-[500] text-popover-foreground/50 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 flex gap-1 justify-center items-center",
             {
               "data-[state=open]:slide-in-from-top-2": side === "bottom",
               "data-[state=open]:slide-in-from-right-2": side === "left",

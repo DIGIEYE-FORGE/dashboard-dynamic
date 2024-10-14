@@ -5,9 +5,11 @@ import { useAddWidgetStore } from "../../widget-store";
 import { useGridStore } from "../../grid-store";
 import WidgetTypeSelector from "../widget-type-selector";
 import { Textarea } from "@/components/ui/textarea";
+import ColorPicker from "@/components/color-picker";
 
 export function Step1() {
-  const { data, setTitle, setApiUrl, setToken } = useAddWidgetStore();
+  const { data, setTitle, setApiUrl, setToken, setBackgroundColor, setColor } =
+    useAddWidgetStore();
   const { widgetId } = useGridStore();
   return (
     <div className="place-content-center ">
@@ -19,6 +21,29 @@ export function Step1() {
         value={data.title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <Label className="inline-block mt-4">colors</Label>
+      <div className="grid grid-cols-2">
+        <div className="flex items-center gap-2">
+          <Label>
+            Background <span className="text-xs">(optional)</span>
+          </Label>
+          <ColorPicker
+            className="w-8 aspect-video rounded-sm"
+            color={data.backgroundColor}
+            onChange={setBackgroundColor}
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Label>
+            Text <span className="text-xs">(optional)</span>
+          </Label>
+          <ColorPicker
+            className="w-8 aspect-video rounded-sm"
+            color={data.color}
+            onChange={setColor}
+          />
+        </div>
+      </div>
       <Label className="inline-block mt-4">api url</Label>
       <Input
         id="apiUrl"

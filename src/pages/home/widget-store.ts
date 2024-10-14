@@ -26,6 +26,8 @@ type Actions = {
   setAttribute: (key: string, value: JsonValue) => void;
   setApiUrl: (apiUrl: string) => void;
   setToken: (token: string) => void;
+  setBackgroundColor: (color: string) => void;
+  setColor: (color: string) => void;
 };
 
 export const useAddWidgetStore = create<State & Actions>((set, get) => ({
@@ -71,9 +73,7 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
   addTelemetry: (data: ChartTelemetry) => {
     const telemetries = (get().data.attributes?.telemetries ||
       []) as ChartTelemetry[];
-    const exist = telemetries.find(
-      (item) => item.name === data.name
-    );
+    const exist = telemetries.find((item) => item.name === data.name);
     if (exist) return;
     const newTelemetries = [...telemetries, data];
     set({
@@ -128,13 +128,13 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
       const telemetryName = get().data.attributes?.telemetryName;
       if (!cardType) return true;
       if (cardType === "text" && !content) return true;
-      if (cardType === "telemetry" && (!telemetryName)) {
+      if (cardType === "telemetry" && !telemetryName) {
         return true;
       }
     }
     if (step === 1 && type === "gauge") {
       const gaugeData = get().data.attributes as GaugeWidgetData;
-      const {  telemetryName, stops } = gaugeData;
+      const { telemetryName, stops } = gaugeData;
       return !telemetryName || !stops || !stops.length;
     }
 
@@ -164,6 +164,22 @@ export const useAddWidgetStore = create<State & Actions>((set, get) => ({
       data: {
         ...get().data,
         token,
+      },
+    });
+  },
+  setBackgroundColor: (color: string) => {
+    set({
+      data: {
+        ...get().data,
+        backgroundColor: color,
+      },
+    });
+  },
+  setColor: (color: string) => {
+    set({
+      data: {
+        ...get().data,
+        color,
       },
     });
   },

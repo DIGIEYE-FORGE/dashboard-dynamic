@@ -27,6 +27,8 @@ export type Widget = {
   id: string;
   title: string;
   type: WidgetType;
+  backgroundColor?: string;
+  color?: string;
   description?: string;
   attributes?: JsonObject;
   apiUrl: string;
