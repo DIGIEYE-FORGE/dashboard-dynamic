@@ -83,6 +83,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.9)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
       zustand:
         specifier: 5.0.0-rc.2
         version: 5.0.0-rc.2(@types/react@18.3.3)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1))
@@ -2852,6 +2855,9 @@ packages:
   zip-object@0.1.0:
     resolution: {integrity: sha512-eujiZK9Z3F/WuswEIWqlaNUwUj67oRw4Op5a1VeKw4n9XBkV7EdxtgblroWBYvLmD7XqZ1cjqsbmE3jU43prTA==}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
   zone.js@0.7.8:
     resolution: {integrity: sha512-u7Hdq+ZRTN/fxoa/G/IYNhkTqUlFODtJIc7iE1EAhhsnjRa/NroQ2ApaKUiVu5W4fpXXjH17Ia7eUtF2sQKgsQ==}
 
@@ -5551,6 +5557,8 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zip-object@0.1.0: {}
+
+  zod@3.23.8: {}
 
   zone.js@0.7.8: {}
 

@@ -1,12 +1,13 @@
-import { Icon } from "@/components/icon";
 import { flatten, Widget } from "@/utils";
 import axios from "axios";
 import { Loader } from "lucide-react";
 import useSWR from "swr";
+import Card1 from "../../card-options/cards/card1";
 
 type Data = {
   icon?: string;
   telemetryName?: string;
+  position: "center" | "left" | "right" | "reverseCenter";
 };
 
 export function stringify(value: unknown) {
@@ -20,7 +21,7 @@ export default function CardWidget({
   apiUrl,
   token,
 }: Widget) {
-  const { telemetryName, icon } = attributes as Data;
+  const { telemetryName, icon, position } = attributes as Data;
 
   const { data, isLoading, error } = useSWR(apiUrl, async () => {
     if (!apiUrl) return;
@@ -47,15 +48,13 @@ export default function CardWidget({
     );
 
   return (
-    <div className="flex justify-between items-center   overflow-hidden  w-full h-full">
-      <div className="flex gap-2 flex-col  capitalize">
-        <span className="font-semibold">{title}</span>
-        <span className="normal-case  truncate">
-          {(telemetryName && stringify(flatten(data)?.[telemetryName])) ||
-            "---"}
-        </span>
-      </div>
-      {icon && <Icon name={icon} size={52} strokeWidth={1.5} />}
-    </div>
+    <Card1
+      title={title}
+      content={
+        (telemetryName && stringify(flatten(data)?.[telemetryName])) || "---"
+      }
+      icon={icon}
+      position={position}
+    />
   );
 }

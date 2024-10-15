@@ -35,7 +35,7 @@ const getWidgetSize = (type: WidgetType) => {
   if (["gauge"].includes(type)) return { w: 3, h: 2, minW: 2, minH: 2 };
   if (["radialBar"].includes(type)) return { w: 3, h: 3, minW: 3, minH: 3 };
   if (type === "table") return { w: 4, h: 4, minW: 3, minH: 3 };
-  if (type === "card") return { w: 3, h: 1, minW: 2, minH: 1 };
+  if (type === "card" ) return { w: 3, h: 1, minW: 2, minH: 1 };
   if (type === "video") return { w: 3, h: 3, minW: 3, minH: 3 };
   else return { w: 2, h: 2 };
 };
@@ -76,6 +76,13 @@ export const useGridStore = create<State & Actions>((set, get) => ({
       return acc;
     }, 0);
     const sizes = getWidgetSize(data.type);
+    if (data?.attributes?.position === "center"  || data?.attributes?.position === "reverseCenter") {
+      sizes.w = 2;
+      sizes.h = 3;
+      sizes.w = 2;
+      sizes.h = 3;
+    }
+
     const isInRow = sizes.w + maxX > 12;
     const layouts = get().layouts.concat({
       i: id,
