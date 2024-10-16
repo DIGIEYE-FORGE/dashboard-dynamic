@@ -79,7 +79,7 @@ export function Grid() {
           })}
         </StaticGrid>
       ) : (
-        <div className="pb-10">
+        <div className="pb-10 ">
           <GridLayouts
             layout={layouts}
             cols={12}
@@ -92,10 +92,12 @@ export function Grid() {
             resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
           >
             {widgets.map((item) => {
+              const { backgroundColor, color } = item;
               return (
                 <Card
-                  className="p-0 [&>*]:p-4  flex flex-col relative group dark:bg-muted"
+                  className="p-0 [&>*]:p-4 flex flex-col relative group dark:bg-muted"
                   key={item.id}
+                  style={{ backgroundColor, color }}
                 >
                   <WidgetContent item={item} key={item.id} />
                 </Card>

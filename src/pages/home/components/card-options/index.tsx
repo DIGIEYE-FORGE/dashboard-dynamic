@@ -8,8 +8,9 @@ import { Label } from "@/components/ui/label";
 import { useAddWidgetStore } from "../../widget-store";
 import { IconPicker } from "@/components/icon-picker";
 import Card1 from "./cards/card1";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+
 const Cards: {
   x: number;
   y: number;
@@ -51,6 +52,12 @@ export default function CardOptions() {
   const setIcon = (icon: string) => {
     setAttribute("icon", icon);
   };
+  const setIsUrl = (isUrl: boolean) => {
+    setAttribute("isUrl", isUrl);
+  };
+
+  const isUrl = data.attributes?.isUrl as boolean;
+  const icon = data.attributes?.icon as string;
 
   const type = data.attributes?.type as WidgetCardType;
 
@@ -68,14 +75,14 @@ export default function CardOptions() {
       <div className="grid grid-cols-3 auto-rows-[4rem]  gap-4 grid-flow-dense p-2">
         {Cards.map((item, index) => {
           return (
-            <motion.div
+            <div
               onClick={() => {
                 setSelectedType(item.position);
                 setAttribute("position", item.position);
               }}
-              whileHover={{ scale: 1.05 }}
+              role="button"
               className={cn(
-                "rounded-lg shadow-lg border border-gray-700 bg-m gap-2 ",
+                "rounded-xl shadow-lg border bg-m gap-2 hover:duration-300 hover:scale-105 hover:-rotate-2 transition-transform active:scale-100 active:rotate-2",
                 {
                   "border-primary": item.position === selectedType,
                 }
@@ -87,11 +94,40 @@ export default function CardOptions() {
               }}
             >
               <Card1 position={item.position as any} />
-            </motion.div>
+            </div>
           );
         })}
       </div>
-      <IconPicker onSelect={setIcon} />
+      <div className="flex items-center gap-8">
+        <Label htmlFor="icon">Icon</Label>
+        <RadioGroup
+          value={isUrl ? "url" : "lucid"}
+          onValueChange={(value) => {
+            setIsUrl(value === "url");
+            if (value === "url") setIcon("");
+          }}
+          className="flex items-center"
+        >
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="lucid" id="lucid" />
+            <Label htmlFor="lucid">lucid</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="url" id="url" />
+            <Label htmlFor="url">url</Label>
+          </div>
+        </RadioGroup>
+      </div>
+      {isUrl ? (
+        <Input
+          type="text"
+          placeholder="icon url"
+          value={icon}
+          onChange={(e) => setIcon(e.target.value)}
+        />
+      ) : (
+        <IconPicker onSelect={setIcon} />
+      )}
       <RadioGroup
         defaultValue={type}
         onValueChange={(value) => setCardType(value as WidgetCardType)}

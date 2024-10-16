@@ -5,13 +5,27 @@ type Data = {
   content?: string;
   icon?: string;
   position: "center" | "left" | "right" | "reverseCenter";
+  isUrl?: boolean;
 };
 
-export default function TextOptions({ title, attributes }: Widget) {
-  const { content, icon, position } = attributes as Data;
+export default function TextOptions({
+  title,
+  backgroundColor,
+  color,
+  attributes,
+}: Widget) {
+  const { content, icon, position, isUrl } = attributes as Data;
   return (
     <>
-      <Card1 title={title} content={content} icon={icon} position={position} />
+      <Card1
+        backgroundColor={backgroundColor}
+        color={color}
+        title={title}
+        content={content}
+        icon={icon}
+        position={position}
+        isUrl={isUrl}
+      />
     </>
   );
 }

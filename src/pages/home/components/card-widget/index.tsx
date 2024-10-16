@@ -10,6 +10,7 @@ type Data = {
   cameraId?: string;
   icon?: string;
   telemetryName?: string;
+  isUrl?: boolean;
 };
 
 export default function CardWidget(props: Widget) {

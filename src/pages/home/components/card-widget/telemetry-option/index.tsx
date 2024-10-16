@@ -8,9 +8,10 @@ type Data = {
   icon?: string;
   telemetryName?: string;
   position: "center" | "left" | "right" | "reverseCenter";
+  isUrl?: boolean;
 };
 
-export function stringify(value: unknown) {
+function stringify(value: unknown) {
   if (typeof value === "string") return value;
   return JSON.stringify(value);
 }
@@ -20,8 +21,10 @@ export default function CardWidget({
   attributes,
   apiUrl,
   token,
+  backgroundColor,
+  color,
 }: Widget) {
-  const { telemetryName, icon, position } = attributes as Data;
+  const { telemetryName, icon, position, isUrl } = attributes as Data;
 
   const { data, isLoading, error } = useSWR(apiUrl, async () => {
     if (!apiUrl) return;
@@ -48,13 +51,18 @@ export default function CardWidget({
     );
 
   return (
-    <Card1
-      title={title}
-      content={
-        (telemetryName && stringify(flatten(data)?.[telemetryName])) || "---"
-      }
-      icon={icon}
-      position={position}
-    />
+    <>
+      <Card1
+        backgroundColor={backgroundColor}
+        color={color}
+        title={title}
+        content={
+          (telemetryName && stringify(flatten(data)?.[telemetryName])) || "---"
+        }
+        icon={icon}
+        position={position}
+        isUrl={isUrl}
+      />
+    </>
   );
 }

@@ -27,7 +27,7 @@ export default function HomePage() {
     }
   }, []);
   return (
-    <main className="h-full flex-1 flex flex-col px-[clamp(1.5rem,5vw,5rem)] py-6">
+    <main className="h-full flex-1 flex flex-col px-6 max-w-[1920px] mx-auto w-full py-6 ">
       <div className="group flex flex-wrap items-center gap-1   w py-2">
         <form className="w-72">
           <Input
