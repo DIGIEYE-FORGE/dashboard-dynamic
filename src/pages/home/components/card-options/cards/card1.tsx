@@ -62,7 +62,7 @@ function Card1({
           <Skeleton className="rounded-full [animation-play-state:paused] w-full h-6" />
         )}
         {content ? (
-          <p className="opacity-75 text-lg first-letter:uppercase truncate max-w-full">
+          <p className="opacity-75 text-lg first-letter:uppercase truncate max-w-full whitespace-pre-line">
             {content}
           </p>
         ) : (
